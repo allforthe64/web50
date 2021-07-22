@@ -69,3 +69,9 @@
 .logo-div {
     transform: translate(35%, 80px)
 }
+
+/*images search button */
+.tiny-link {
+    font-family: Arial, Helvetica, sans-serif;
+    transform: translate(90%, -250px)
+}
