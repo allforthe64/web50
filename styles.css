@@ -31,3 +31,12 @@
     outline:none;
 }
 
+/*search icon */
+#searchIcon {
+    width:2%;
+    height:2%;
+
+    /* adjust position */
+    transform: translate(140%, 30%);
+}
+
