@@ -9,6 +9,9 @@
 
     /* adjust font size */
     font-size: 20px;
+
+    /* adjust where typing cursor starts */
+    padding-left: 50px;
 }
 
 /* add shadow around search box when hovered */
@@ -24,6 +27,7 @@
 }
 
 /* remove outline around box when clicked */
-input:focus {
+.search:focus {
     outline:none;
 }
+
