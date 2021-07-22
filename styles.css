@@ -11,5 +11,6 @@
 .form-div {
     display:flex;
     justify-content:center;
-    align-items:center;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%)
 }
