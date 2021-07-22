@@ -6,6 +6,9 @@
 
     /* round edges */
     border-radius: 25px;
+
+    /* adjust font size */
+    font-size: 20px;
 }
 
 /* add shadow around search box when hovered */
