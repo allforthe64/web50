@@ -7,3 +7,9 @@
     /*make edges rounded */
     border-radius:25px;
 }
+
+.form-div {
+    /* center div */
+    display:flex;
+    justify-content:center;
+}
