@@ -1,16 +1,10 @@
 .search {
 
-    /* adjust width and height of search box*/
-    height:45px;
-    width:750px;
+    /* adjust width and height of form */
+    width: 750px;
+    height: 45px;
 
-    /*make edges rounded */
-    border-radius:25px;
-}
+    /* round edges */
+    border-radius: 25px;
 
-.form-div {
-    /* center div */
-    display:flex;
-    justify-content:center;
-    align-items:center;
 }
