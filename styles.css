@@ -64,3 +64,8 @@
    
     transform: translate(37%, 400px)
 }
+
+/*Google logo */
+.logo-div {
+    transform: translate(35%, 80px)
+}
