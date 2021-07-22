@@ -62,7 +62,5 @@
 /* position div */
 .search-div {
    
-    display:flex;
-    justify-content:center;
-    transform: translateY( 1100%)
+    transform: translate(37%, 400px)
 }
