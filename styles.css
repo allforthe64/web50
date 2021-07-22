@@ -8,9 +8,19 @@
     border-radius: 25px;
 }
 
+/* add shadow around search box when hovered */
+.search:hover {
+    box-shadow: 2px 2px 5px grey;
+}
+
 .form-div {
     display:flex;
     justify-content:center;
     -ms-transform: translateY(700%);
     transform: translateY(700%)
+}
+
+/* remove outline around box when clicked */
+input:focus {
+    outline:none;
 }
