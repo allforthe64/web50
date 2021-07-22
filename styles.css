@@ -6,5 +6,10 @@
 
     /* round edges */
     border-radius: 25px;
+}
 
+.form-div {
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
