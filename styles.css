@@ -1,3 +1,4 @@
+/*search bar and related elements */
 .search {
 
     /* adjust width and height of form */
@@ -40,3 +41,28 @@
     transform: translate(140%, 30%);
 }
 
+/* google search button */
+.searchButton {
+    
+    /* set width and height */
+    width: 150px;
+    height: 35px;
+
+    /* make visual adjustments */
+    background-color:#e6e6e6;
+    border: none;
+    border-radius:5px;
+}
+
+/* add shadow on hover */
+.searchButton:hover {
+    box-shadow: 2px 1px 2px grey;
+}
+
+/* position div */
+.search-div {
+   
+    display:flex;
+    justify-content:center;
+    transform: translateY( 1100%)
+}
