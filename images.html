@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <form action="https://google.com/search">
+        <form action="https://google.com/search" method="GET">
             <!--Search Bar-->
             <div class="form-div">
                 <!--search icon-->
@@ -13,6 +13,9 @@
                 
                 <!--Search Bar-->
                 <input class="search" type="search" name="q">
+                
+                <!--invisible button to force image search-->
+                <input type=hidden name="tbm" value="isch">
             </div>
             <!--Google Search Button-->
             <div class="search-div">
