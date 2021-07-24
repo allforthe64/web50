@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <form action="https://google.com/search">
+            
+            <div>
+                <label>All these words:</label>
+                <div class="smallSearch">
+                    <input type="text" name="as_q">
+                </div>
+                
+            </div>
+
+            <!--This exact word or phrase-->
+            <div>
+                <label>This exact word or phrase:</label>
+                <div class="smallSearch">
+                    <input type="text" name="as_epq">
+                </div>
+                
+            </div>
+
+            <!--any of these words-->
+            <div>
+                <label>Any of these words:</label>
+                <div class="smallSearch">
+                    <input type="text" name="as_oq">
+                </div>
+                
+            </div>
+
+            <!--none of these words-->
+            <div>
+                <label>None of these words:</label>
+                <div class="smallSearch">
+                    <input type="text" name="as_eq">
+                </div>
+                
+            </div>
+            <br>
+            <br>
+            <center>
+                <input type="submit" data-toggle="button" value="Advanced Search">
+            </center>
+        </form>
+        
+    </body>
+</html>
