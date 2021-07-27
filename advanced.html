@@ -5,29 +5,31 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <h3 style="margin-left:20px">Find pages with...</h3>
+        <br>
         <form action="https://google.com/search">
             
-            <div style="display: flex; align-items: center;">
+            <div style="display: flex; align-items: center; margin-left:20px">
                 <label>All these words:</label>
                 <input type="text" name="as_q" id="searchBox1">  
             </div>
 
             <!--This exact word or phrase-->
-            <div style="display: flex; align-items: center; margin-top:25px">
+            <div style="display: flex; align-items: center; margin-top:25px; margin-left:20px">
                 <label>This exact word or phrase:</label>
                 <input type="text" name="as_epq" id="searchBox2">
                 
             </div>
 
             <!--any of these words-->
-            <div style="display: flex; align-items: center; margin-top:25px">
+            <div style="display: flex; align-items: center; margin-top:25px; margin-left:20px">
                 <label>Any of these words:</label>
                 <input type="text" name="as_oq" id="searchBox3">
             
             </div>
 
             <!--none of these words-->
-            <div style="display: flex; align-items: center; margin-top: 25px">
+            <div style="display: flex; align-items: center; margin-top: 25px; margin-left:20px">
                 <label>None of these words:</label>
                 <input type="text" name="as_eq" id="searchBox4">
                 
@@ -35,7 +37,7 @@
             <br>
             <br>
             <center>
-                <input type="submit" data-toggle="button" value="Advanced Search">
+                <input type="submit" data-toggle="button" value="Advanced Search" id="advncedSearchBtn">
             </center>
         </form>
         

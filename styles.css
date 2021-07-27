@@ -101,3 +101,14 @@
     margin-left: 86px; 
 }
 
+#advncedSearchBtn {
+    height: 45px; 
+    background-color:rgb(69, 69, 179); 
+    color:white; 
+    border-radius:10px; 
+    border:none
+}
+
+#advncedSearchBtn:hover {
+    box-shadow: inset 0px -5px 5px rgba(0, 0, 0, 0.5); 
+} 
