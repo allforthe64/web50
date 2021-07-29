@@ -9,8 +9,16 @@ def index(request):
     })
 
 def entry(request, targetPage):
-    return render(request, f"encyclopedia/{targetPage}.html", {
-        "contents": util.get_entry(targetPage)
-    })
+    #search for .md file and get its contents
+    pageContent = util.get_entry(targetPage)
+
+    #check to see if a result was found
+    if pageContent == None:
+        return render(request, "encyclopedia/error.html")
+    #if result was found render the page
+    else:
+        return render(request, f"encyclopedia/{targetPage}.html", {
+            "contents": pageContent
+        })
 
 
