@@ -17,8 +17,9 @@ def entry(request, targetPage):
         return render(request, "encyclopedia/error.html")
     #if result was found render the page
     else:
-        return render(request, f"encyclopedia/{targetPage}.html", {
-            "contents": pageContent
+        return render(request, f"encyclopedia/Entry.html", {
+            "contents": pageContent,
+            "pageTitle": targetPage
         })
 
 
