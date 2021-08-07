@@ -3,7 +3,13 @@ from django.shortcuts import render
 from . import util
 
 
+#initialize pages list
+pages = ["CSS", "Django", "Git", "HTML", "Python"]
+
 def index(request):
+
+    if request.method() == "POST":
+        pass
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
