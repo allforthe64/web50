@@ -1,0 +1,24 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>Related entries</h1>
+    <br>
+    <h5>Your query couldn't be found. Here are some articles related to your search:</h3>
+    <br>
+    <ul>
+        {% if entries %}
+            {% for entry in entries %}
+                <li><a href="{{entry}}">{{ entry }}</a></li>
+            {% endfor %}
+        
+        
+        {% else %}
+            <h2>No pages with that substring could be found!</h2>
+        {% endif %}
+    </ul>
+
+{% endblock %}
