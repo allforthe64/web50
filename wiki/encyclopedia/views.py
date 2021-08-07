@@ -3,12 +3,16 @@ from django.shortcuts import redirect
 
 from . import util
 from wiki import *
+import entries
 
 
 #initialize pages list
-pages = ["CSS", "Django", "Git", "HTML", "Python"]
+pages = []
 
 def index(request):
+
+    for entry in entries:
+        pages.append()
 
     #search list of entries for page
     if request.method == "POST":
@@ -16,7 +20,6 @@ def index(request):
         
         if query in pages:
             return redirect(f"wiki/{query}")
-
         else:
             return render(request, "encyclopedia/index.html")
 
