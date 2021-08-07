@@ -12,15 +12,18 @@ entries = "/Users/linds/Desktop/will/web50/web50/wiki/entries"
 
 def index(request):
 
+    #clear out list
+    pages.clear()
+
     for entry in os.listdir(entries):
         
         #split off the ".md" file tag
         entry = str(entry)
         add = entry.split(".md")
 
+        #append file name to pages list
         pages.append(add[0])
 
-    print(pages)
 
     #search list of entries for page
     if request.method == "POST":
@@ -29,6 +32,14 @@ def index(request):
         if query in pages:
             return redirect(f"wiki/{query}")
         else:
+
+            #iterate over each entry in the page and check if substring in entry
+            print(pages)
+            for page in pages:
+                if query in page:
+                    print(page)
+                    print("Found!")
+
             return render(request, "encyclopedia/index.html")
 
     return render(request, "encyclopedia/index.html", {
