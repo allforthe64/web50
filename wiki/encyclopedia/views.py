@@ -1,3 +1,4 @@
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import redirect
 
@@ -54,6 +55,7 @@ def index(request):
 def entry(request, targetPage):
     
     if request.method == "GET":
+        
         #search for .md file and get its contents
         pageContent = util.get_entry(targetPage)
 
@@ -85,7 +87,8 @@ def entry(request, targetPage):
             query = request.POST.get("q")
             
             if query in pages:
-                return redirect(f"wiki/{query}")
+                print(query)
+                return HttpResponseRedirect(f"{query}")
             else:
                 #clear related entries list
                 relatedEntries.clear()
