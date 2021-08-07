@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 
 from . import util
 from wiki import *
@@ -12,9 +13,9 @@ def index(request):
     #search list of entries for page
     if request.method == "POST":
         query = request.POST.get("q")
-
-        if query == "Sbeve":
-            return render(request, "encyclopedia/error.html")
+        
+        if query in pages:
+            return redirect(f"wiki/{query}")
 
         else:
             return render(request, "encyclopedia/index.html")
