@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from . import util
+from wiki import *
 
 
 #initialize pages list
@@ -8,8 +9,16 @@ pages = ["CSS", "Django", "Git", "HTML", "Python"]
 
 def index(request):
 
-    if request.method() == "POST":
-        pass
+    #search list of entries for page
+    if request.method == "POST":
+        query = request.POST.get("q")
+
+        if query == "Sbeve":
+            return render(request, "encyclopedia/error.html")
+
+        else:
+            return render(request, "encyclopedia/index.html")
+
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
