@@ -3,16 +3,24 @@ from django.shortcuts import redirect
 
 from . import util
 from wiki import *
-import entries
+import os
 
 
 #initialize pages list
 pages = []
+entries = "/Users/linds/Desktop/will/web50/web50/wiki/entries"
 
 def index(request):
 
-    for entry in entries:
-        pages.append()
+    for entry in os.listdir(entries):
+        
+        #split off the ".md" file tag
+        entry = str(entry)
+        add = entry.split(".md")
+
+        pages.append(add[0])
+
+    print(pages)
 
     #search list of entries for page
     if request.method == "POST":
