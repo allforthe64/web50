@@ -108,4 +108,21 @@ def new(request):
     if request.method == "GET":
         return render(request, "encyclopedia/new.html")
 
+    if request.method == "POST":
+        title = request.POST.get("title")
+        contents = request.POST.get("newPageContents")
+
+        if util.get_entry(title) == None:
+            util.save_entry(title, contents)
+        
+            message = "Page saved successfully!"
+            return render(request, "encyclopedia/index.html", {
+                "message": message
+            })
+        else:
+            message = "An article with that title already exists!"
+            return render(request, "encyclopedia/new.html",{
+                "message": message
+            })
+
 

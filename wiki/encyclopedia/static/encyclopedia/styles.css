@@ -37,6 +37,15 @@ textarea {
     margin-top: 5px;
 }
 
+.searchButton {
+    background-color: rgb(63, 63, 240); 
+    width:100px; 
+    height:45px; 
+    color:white; 
+    border-radius: 5px;
+    margin-left: 40px
+}
+
 .searchButton:hover {
-    box-shadow: 5px 5px 10px
+    box-shadow: 5px 5px;
 }
