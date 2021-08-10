@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from . import util
 from wiki import *
 import os
+from random import choice
 
 
 #initialize pages list
@@ -124,5 +125,25 @@ def new(request):
             return render(request, "encyclopedia/new.html",{
                 "message": message
             })
+
+#go to a random page
+def random(request):
+    
+    #generate list to randomly go to
+    
+    #clear out list
+    pages.clear()
+
+    for entry in os.listdir(entries):
+        
+        #split off the ".md" file tag
+        entry = str(entry)
+        add = entry.split(".md")
+
+        #append file name to pages list
+        pages.append(add[0])
+
+    target = choice(pages)
+    return HttpResponseRedirect(f"wiki/{target}")
 
 
