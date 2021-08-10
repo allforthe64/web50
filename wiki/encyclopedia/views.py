@@ -9,7 +9,7 @@ import os
 
 #initialize pages list
 pages = []
-entries = "/Users/linds/Desktop/will/web50/web50/wiki/entries"
+entries = "E:\William\web50\wiki\entries"
 
 #initalize list to hold search entries
 relatedEntries = []
