@@ -1,0 +1,42 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create New Page 
+{% endblock %}
+<head>
+    <style>
+        .searchButton {
+            background-color: rgb(63, 63, 240); 
+            width:100px; 
+            height:45px; 
+            color:white; 
+            border-radius: 5px;
+        }   
+
+        .searchButton:hover {
+            box-shadow: 5px 5px 10px;
+        }
+    </style>
+</head>
+{% block body %}
+    <h1 style="margin: left 40px;">Create New Page:</h1>
+    <br>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <!--Title creation-->
+        <div style="margin: left 40px;">
+            <h3>Enter Title:</h3>
+            <input type="text" name="title" style="width: 400px; height:30px;">
+        </div>
+
+        <!--text area-->
+        <div>
+            <h3>Content:</h3>    
+            <textarea name="newPageContents" rows="4" cols="50"></textarea>
+        </div>
+        
+        <input class="searchButton" type="submit" placeholder="Save Page">
+    </form>
+
+{% endblock %}

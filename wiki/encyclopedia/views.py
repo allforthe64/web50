@@ -102,4 +102,10 @@ def entry(request, targetPage):
                     "entries": relatedEntries
                 })
 
+#create a new page
+def new(request):
+
+    if request.method == "GET":
+        return render(request, "encyclopedia/new.html")
+
 
