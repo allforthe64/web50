@@ -62,14 +62,22 @@ def entry(request, targetPage):
         pageContent = util.get_entry(targetPage)
         mark = Markdown()
 
+        possiblePages = ["CSS", "Django", "Git", "HTML", "Python", "The dog doin"]
+        if targetPage in possiblePages:
+            titleMissing = False
+        else:
+            titleMissing = True
+
+
         #check to see if a result was found
         if pageContent == None:
             return render(request, "encyclopedia/error.html")
         #if result was found render the page
         else:
-            print(mark.convert(pageContent))
             return render(request, "encyclopedia/Entry.html", {
-                "pageContent": mark.convert(pageContent) 
+                "pageContent": mark.convert(pageContent),
+                "titleMissing": titleMissing,
+                "title": targetPage 
             })
 
     else:
@@ -115,7 +123,7 @@ def new(request):
     if request.method == "POST":
         title = request.POST.get("title")
         contents = request.POST.get("newPageContents")
-
+        
         if util.get_entry(title) == None:
             util.save_entry(title, contents)
         
@@ -149,4 +157,5 @@ def random(request):
     target = choice(pages)
     return HttpResponseRedirect(f"wiki/{target}")
 
-
+def edit(request, pageTitle):
+    return render(request, "encyclopedia/edit.html")

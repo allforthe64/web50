@@ -1,0 +1,1 @@
+Lead singer and rhythm guitarist for Sound Garden. Legendary man.
