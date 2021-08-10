@@ -6,6 +6,7 @@ from . import util
 from wiki import *
 import os
 from random import choice
+from markdown2 import Markdown 
 
 
 #initialize pages list
@@ -59,16 +60,18 @@ def entry(request, targetPage):
         
         #search for .md file and get its contents
         pageContent = util.get_entry(targetPage)
+        mark = Markdown()
 
         #check to see if a result was found
         if pageContent == None:
             return render(request, "encyclopedia/error.html")
         #if result was found render the page
         else:
-            return render(request, f"encyclopedia/Entry.html", {
-                "contents": pageContent,
-                "pageTitle": targetPage
+            print(mark.convert(pageContent))
+            return render(request, "encyclopedia/Entry.html", {
+                "pageContent": mark.convert(pageContent) 
             })
+
     else:
         #clear out list
         pages.clear()
