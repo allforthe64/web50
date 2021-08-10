@@ -37,3 +37,6 @@ textarea {
     margin-top: 5px;
 }
 
+.searchButton:hover {
+    box-shadow: 5px 5px 10px
+}

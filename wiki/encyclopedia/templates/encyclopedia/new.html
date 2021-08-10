@@ -3,21 +3,7 @@
 {% block title %}
     Create New Page 
 {% endblock %}
-<head>
-    <style>
-        .searchButton {
-            background-color: rgb(63, 63, 240); 
-            width:100px; 
-            height:45px; 
-            color:white; 
-            border-radius: 5px;
-        }   
 
-        .searchButton:hover {
-            box-shadow: 5px 5px 10px;
-        }
-    </style>
-</head>
 {% block body %}
     <h1 style="margin: left 40px;">Create New Page:</h1>
     <br>
@@ -36,7 +22,15 @@
             <textarea name="newPageContents" rows="4" cols="50"></textarea>
         </div>
         
-        <input class="searchButton" type="submit" placeholder="Save Page">
+        
+        <button type="submit" style="
+        background-color: rgb(63, 63, 240); 
+        width:100px; 
+        height:45px; 
+        color:white; 
+        border-radius: 5px"
+        >Save Page</button>
+        
     </form>
 
 {% endblock %}
