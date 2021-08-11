@@ -8,7 +8,9 @@
     <h1 style="margin: left 40px;">Edit Page:</h1>
     <br>
     {% if message %}
+        <br>
         <h4>{{message}}</h4>
+        <br>
     {% endif %}
     
     <form method="POST">
@@ -16,13 +18,13 @@
         <!--Title creation-->
         <div style="margin-left: 40px;">
             <h3>Edit Title:</h3>
-            <input type="text" name="title" style="width: 400px; height:30px;">
+            <input type="text" name="title" style="width: 400px; height:30px;" value="{{title}}">
         </div>
 
         <!--text area-->
         <div style="margin-left: 40px">
             <h3>Edit Content:</h3>    
-            <textarea name="newPageContents" rows="4" cols="50"></textarea>
+            <textarea name="newPageContents" rows="4" cols="50">{{contents}}</textarea>
         </div>
         
         

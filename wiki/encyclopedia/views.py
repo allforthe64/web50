@@ -158,4 +158,31 @@ def random(request):
     return HttpResponseRedirect(f"wiki/{target}")
 
 def edit(request, pageTitle):
-    return render(request, "encyclopedia/edit.html")
+
+    if request.method == "GET":
+
+        contents = util.get_entry(pageTitle)
+        title = pageTitle
+        return render(request, "encyclopedia/edit.html", {
+            "title": title,
+            "contents": contents
+     })
+
+    if request.method == "POST":
+        
+        #et title and content to put in new file
+        newTitle = request.POST.get("title")
+        newContent = request.POST.get("newPageContents")
+
+        #remove old file
+        fileToRemove = pageTitle + ".md"
+        os.remove(f"entries/{fileToRemove}")
+
+        util.save_entry(newTitle, newContent)
+
+        return HttpResponseRedirect("/")
+
+
+
+        
+        
