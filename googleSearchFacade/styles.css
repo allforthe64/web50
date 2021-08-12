@@ -34,8 +34,8 @@
 
 /*search icon */
 #searchIcon {
-    width:2%;
-    height:2%;
+    width:1%;
+    height:1%;
 
     /* adjust position */
     transform: translate(140%, 30%);
@@ -62,17 +62,17 @@
 /* position div */
 .search-div {
    
-    transform: translate(37%, 400px)
+    transform: translate(45%, 400px)
 }
 
 /*Google logo */
 .logo-div {
-    transform: translate(35%, 70px)
+    transform: translate(43%, 70px)
 }
 
 /*images search button */
 .tiny-link {
-    transform: translate(90%, -230px)
+    transform: translate(90%, -200px)
 }
 
 /* set font family for tiny text */
