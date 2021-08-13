@@ -16,9 +16,10 @@ def index(request):
     for listing in listings:
         links.append(listing.title)
 
-    print(links)
+    print(listings[0].title)
+    
     return render(request, "auctions/index.html", {
-        "listings": links,
+        "listings": listings,
     })
 
 def login_view(request):
