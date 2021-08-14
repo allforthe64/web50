@@ -75,5 +75,3 @@ def register(request):
 
 def listing(request):
     pass;   
-    
-    
