@@ -73,5 +73,5 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
-def listing(request):
-    pass;   
+def listing(request, listingTitle):
+    pass       

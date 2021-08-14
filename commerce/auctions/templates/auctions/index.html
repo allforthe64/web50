@@ -7,7 +7,7 @@
     <br>
     <ul>
         {% for listing in listings %}
-            <li  style="font-size: 20px;"><a href="{% url 'listing' %}">{{listing.title}}</a></li>
+            <li  style="font-size: 20px;" name="listingTitle"><a href='listing/{{listing.title}}'>{{listing.title}}</a></li>
                 <ul>
                     <br>
                     <h6>Description:</h6>
