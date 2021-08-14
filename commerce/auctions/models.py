@@ -14,3 +14,4 @@ class Listing(models.Model):
     img = models.URLField(max_length = 200, blank = True, help_text = "*Optional* Enter image URL")
     category = models.CharField(max_length = 64, blank = True, help_text = "*Optional* Enter listing category")
     active = models.BooleanField(default = True)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, default="Foo")

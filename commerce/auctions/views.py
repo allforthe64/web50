@@ -16,7 +16,7 @@ def index(request):
     for listing in listings:
         links.append(listing.title)
 
-    print(listings)
+    print(listings[0].title)
     
     return render(request, "auctions/index.html", {
         "listings": listings,
