@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models.fields import CharField
 
 
 class User(AbstractUser):
@@ -15,3 +16,9 @@ class Listing(models.Model):
     category = models.CharField(max_length = 64, blank = True, help_text = "*Optional* Enter listing category")
     active = models.BooleanField(default = True)
     creator = models.CharField(max_length = 64, help_text = "Enter listing's creator:", default="None")
+
+class Bid(models.Model):
+    id = models.AutoField(primary_key=True, default = None)
+    ammount = models.FloatField(help_text = "Enter ammount to bid")
+    bidder = models.CharField(max_length=64, help_text="Enter username of bidder", default="None")
+    location = models.CharField(max_length=64, help_text="Enter the name of listing to bid on", default="None")

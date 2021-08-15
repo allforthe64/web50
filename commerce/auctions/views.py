@@ -81,6 +81,8 @@ def listing(request, listingTitle):
     return render(request, "auctions/listing.html", {
         "title": listingTitle,
         "description": listing[0].description,
-        "image": listing[0].img    
+        "image": listing[0].img, 
+        "originalPrice": listing[0].beginningBid,
+        "currentHighestBid": "foo"   
 
     })       
