@@ -1,0 +1,16 @@
+
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <!--Ttile-->
+    <h1 style="margin-left: 20px;">{{title}}</h1>
+    <br>
+    <!--Image-->
+    <img src="{{image}}" alt="Image of {{title}}" style="width: 50%; height:50%; margin-left: 20px">
+    <br>
+    <br>
+    <br>
+    <!--Description-->
+    <h3 style="margin-left: 20px;">Description:</h3>
+    <p style="margin-left: 40px;">{{description}}</p>
+{% endblock %}  

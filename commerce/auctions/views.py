@@ -74,4 +74,13 @@ def register(request):
         return render(request, "auctions/register.html")
 
 def listing(request, listingTitle):
-    pass       
+
+    #get data out of listings model
+    listing = Listing.objects.filter(title = listingTitle)
+
+    return render(request, "auctions/listing.html", {
+        "title": listingTitle,
+        "description": listing[0].description,
+        "image": listing[0].img    
+
+    })       
