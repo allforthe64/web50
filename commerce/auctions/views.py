@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import User, Listing
+from .models import User, Listing, Bid
 
 @login_required(login_url='/login')
 def index(request):
@@ -15,8 +15,6 @@ def index(request):
 
     for listing in listings:
         links.append(listing.title)
-
-    print(listings[0].title)
     
     return render(request, "auctions/index.html", {
         "listings": listings,
@@ -73,16 +71,28 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
+@login_required(login_url='/login')
 def listing(request, listingTitle):
+
+    #get current user and establish message
+    currentUser = request.user.username
+    message = "foo"
 
     #get data out of listings model
     listing = Listing.objects.filter(title = listingTitle)
+
+    #get data out of bid model
+    topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
+
+    if listing[0].active == False and currentUser == topBid[0].bidder:
+        message = "You had the highest bid in the auction!"
 
     return render(request, "auctions/listing.html", {
         "title": listingTitle,
         "description": listing[0].description,
         "image": listing[0].img, 
         "originalPrice": listing[0].beginningBid,
-        "currentHighestBid": "foo"   
+        "currentHighestBid": topBid[0].ammount,
+        "message": message   
 
     })       
