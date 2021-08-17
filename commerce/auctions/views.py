@@ -74,25 +74,65 @@ def register(request):
 @login_required(login_url='/login')
 def listing(request, listingTitle):
 
-    #get current user and establish message
-    currentUser = request.user.username
-    message = "foo"
+    #get method
+    if request.method == "GET":
 
-    #get data out of listings model
-    listing = Listing.objects.filter(title = listingTitle)
+        #get current user and establish message
+        currentUser = request.user.username
+        message = ""
+        message2 = ""
 
-    #get data out of bid model
-    topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
+        #get data out of listings model
+        listing = Listing.objects.filter(title = listingTitle)
 
-    if listing[0].active == False and currentUser == topBid[0].bidder:
-        message = "You had the highest bid in the auction!"
+        #get data out of bid model
+        topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
 
-    return render(request, "auctions/listing.html", {
-        "title": listingTitle,
-        "description": listing[0].description,
-        "image": listing[0].img, 
-        "originalPrice": listing[0].beginningBid,
-        "currentHighestBid": topBid[0].ammount,
-        "message": message   
+        if listing[0].active == False and currentUser == topBid[0].bidder:
+            message = "You had the highest bid in the auction!"
+        else:
+            message = None
 
-    })       
+        return render(request, "auctions/listing.html", {
+            "title": listingTitle,
+            "description": listing[0].description,
+            "image": listing[0].img, 
+            "originalPrice": listing[0].beginningBid,
+            "currentHighestBid": topBid[0].ammount,
+            "message": message   
+
+        })
+
+    #post method
+    else:
+
+        #get data out of forms
+        newBid = request.POST.get("newBid")
+        currentUser = request.user.username
+
+        #get data out of listings model
+        listing = Listing.objects.filter(title = listingTitle)
+
+        #get data out of bid model
+        topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
+
+        #if the user entered a bid, insert it as the new highest bid
+        if newBid != None:
+            
+            b = Bid(ammount=newBid, bidder=currentUser, location=listingTitle)
+            b.save()
+
+            #add message 2
+            message2 = "Bid saved succesfully!"
+
+            return render(request, "auctions/listing.html", {
+            "title": listingTitle,
+            "description": listing[0].description,
+            "image": listing[0].img, 
+            "originalPrice": listing[0].beginningBid,
+            "currentHighestBid": topBid[0].ammount,
+            "message2": message2   
+            
+            })
+
+        return HttpResponseRedirect(reverse("index"))
