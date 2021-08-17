@@ -161,4 +161,32 @@ def listing(request, listingTitle):
 
 @login_required(login_url="/login")
 def new(request):
-    
+
+    #get route
+    if request.method == "GET":
+        message = None
+        return render(request, "auctions/new.html")
+
+    else:
+
+        #get the data
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        image = request.POST.get("image")
+        category = request.POST.get("category")
+        price = request.POST.get("price")
+        currentUser = request.user.username
+        message = "New listing created!"
+
+        #create new listing
+        l = Listing(title=title, description=description, beginningBid=price, img=image, category=category, active=True, creator=currentUser)
+        l.save()
+
+        
+        #add new bid to bids table
+        b = Bid(ammount=price, bidder=currentUser, location=title)
+        b.save()
+
+        return render(request, "auctions/new.html", {
+            "message": message
+        })

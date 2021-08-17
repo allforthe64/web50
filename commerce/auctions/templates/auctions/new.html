@@ -1,0 +1,46 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+     <!--if the user creates listing, display message-->
+     {% if message %}
+     <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <strong>{{message}}</strong> Congratulations, you've purchased the item!
+       </div>
+     {% endif %}
+
+    <br>
+    <h1 style="margin-left:20px">Create a new listing:</h1>
+
+    <form method = "POST">
+        {% csrf_token %}
+        <br>
+        <div style="margin-left: 20px">
+            <h3>Enter title:</h3>
+            <input type="text" style="width: 450px" required name="title">
+        </div>
+        <br>
+        <div style="margin-left: 20px">
+            <h3>Enter description:</h3>
+            <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter item's description" required></textarea>
+        </div>
+        <br>
+        <div style="margin-left: 20px">
+            <h3>Enter url for image of item:</h3>
+            <input type="text" style="width: 450px" name="image">
+        </div>
+        <br>
+        <div style="margin-left: 20px">
+            <h3>Enter price of item:</h3>
+            <input type="number" step="0.01" min="0.01" name="price">
+        </div>
+        <br>
+        <div style="margin-left: 20px">
+            <h3>Enter category for item:</h3>
+            <input type="text" style="width: 300px;" name="category">
+        </div>
+        <br>
+        <hr>
+        <br>
+        <button type="submit" class="btn btn-primary" style="margin-left: 20px">Create new listing</button>
+    </form>
+{% endblock %}
