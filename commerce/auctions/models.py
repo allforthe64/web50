@@ -22,3 +22,8 @@ class Bid(models.Model):
     ammount = models.FloatField(help_text = "Enter ammount to bid")
     bidder = models.CharField(max_length=64, help_text="Enter username of bidder", default="None")
     location = models.CharField(max_length=64, help_text="Enter the name of listing to bid on", default="None")
+
+class Watchlist(models.Model):
+    id = models.AutoField(primary_key=True, default=None)
+    page = models.CharField(max_length=64, help_text="Add page title")
+    watcher = models.CharField(max_length=64, help_text = "Add name of watcher")
