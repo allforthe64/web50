@@ -157,3 +157,8 @@ def listing(request, listingTitle):
             })
 
         return HttpResponseRedirect(reverse("index"))
+
+
+@login_required(login_url="/login")
+def new(request):
+    
