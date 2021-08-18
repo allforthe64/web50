@@ -190,3 +190,47 @@ def new(request):
         return render(request, "auctions/new.html", {
             "message": message
         })
+
+
+@login_required(login_url="/login")
+def watchlist(request):
+
+    if request.method == "GET":
+        #get listings out of watchlist table
+        currentUser = request.user.username
+        
+        listings = Watchlist.objects.all().filter(watcher = currentUser)
+
+        return render(request, "auctions/watchlist.html", {
+            "listings": listings
+        })
+    else:
+        
+        #get item to remove from watchlist
+        watchElement = request.POST.get("watchElement")
+        currentUser = request.user.username
+        listings = Watchlist.objects.all().filter(watcher = currentUser)
+        message = f"Item: {watchElement} has been removed from your watchlist."
+
+        instance = Watchlist.objects.all().filter(page=watchElement, watcher=currentUser)
+        
+        #error checking
+        if instance == "None":
+            return render(request, "auctions/watchlist.html", {
+            "listings": listings,
+            "message": message
+        })
+        else:
+            instance[0].delete()
+
+            return render(request, "auctions/watchlist.html", {
+                "listings": listings,
+                "message": message
+            })
+
+        
+
+
+
+
+        
