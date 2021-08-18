@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from django.db import IntegrityError
+from django.db import IntegrityError, connection
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -81,9 +81,14 @@ def listing(request, listingTitle):
         currentUser = request.user.username
         message = ""
         message2 = ""
+        creator = False
 
         #get data out of listings model
         listing = Listing.objects.filter(title = listingTitle)
+        
+        #check to see if the page's creator is the one using the page
+        if listing[0].creator == currentUser:
+            creator = True
 
         #get data out of bid model
         topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
@@ -99,7 +104,8 @@ def listing(request, listingTitle):
             "image": listing[0].img, 
             "originalPrice": listing[0].beginningBid,
             "currentHighestBid": topBid[0].ammount,
-            "message": message   
+            "message": message,
+            "creator": creator   
 
         })
 
@@ -110,6 +116,10 @@ def listing(request, listingTitle):
         newBid = request.POST.get("newBid")
         watchlist = request.POST.get("watchlist")
         currentUser = request.user.username
+        close = request.POST.get("close")
+        creator = False
+
+        
 
         #get data out of listings model
         listing = Listing.objects.filter(title = listingTitle)
@@ -117,9 +127,12 @@ def listing(request, listingTitle):
         #get data out of bid model
         topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
 
+        if listing[0].creator == currentUser:
+            creator = True
+
         #if the user entered a bid, insert it as the new highest bid
         if newBid != None:
-            
+
             #add new bid to bids table
             b = Bid(ammount=newBid, bidder=currentUser, location=listingTitle)
             b.save()
@@ -133,13 +146,14 @@ def listing(request, listingTitle):
             "image": listing[0].img, 
             "originalPrice": listing[0].beginningBid,
             "currentHighestBid": topBid[0].ammount,
-            "message2": message2   
+            "message2": message2,
+            "creator": creator   
             
             })
         
         #add item to watchlist
         if watchlist != None:
-            
+
             #add new watchlist entry to watchlist table
             w = Watchlist(page=listingTitle, watcher=currentUser)
             w.save()
@@ -152,9 +166,31 @@ def listing(request, listingTitle):
             "image": listing[0].img, 
             "originalPrice": listing[0].beginningBid,
             "currentHighestBid": topBid[0].ammount,
-            "message2": message2   
+            "message2": message2,
+            "creator": creator   
             
             })
+
+        #close auction
+        if close == "true":
+            
+            Listing.objects.filter(title=listingTitle).update(active = False)
+
+            listing = Listing.objects.filter(title = listingTitle)
+
+            message2 = "Auction has been closed!"
+
+            return render(request, "auctions/listing.html", {
+            "title": listingTitle,
+            "description": listing[0].description,
+            "image": listing[0].img, 
+            "originalPrice": listing[0].beginningBid,
+            "currentHighestBid": topBid[0].ammount,
+            "message2": message2,
+            "creator": creator   
+            
+            })
+            
 
         return HttpResponseRedirect(reverse("index"))
 
@@ -228,8 +264,8 @@ def watchlist(request):
                 "message": message
             })
 
-        
-
+    
+    
 
 
 
