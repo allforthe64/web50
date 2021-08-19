@@ -5,6 +5,9 @@
     <h2>Active Listings</h2>
     <br>
     <br>
+    {% if Listings == None %}
+        <h1>No listings are currently active</h1>
+    {% endif %}
     <ul>
         {% for listing in listings %}
             <li  style="font-size: 20px;" name="listingTitle"><a href='listing/{{listing.title}}'>{{listing.title}}</a></li>
@@ -14,6 +17,9 @@
                     <p>{{listing.description}}</p>
                     <br>
                     <h6>Highest Offer:</h6>
+                    <p>${{listing.highestBid}}</p>
+                    <br>
+                    <h6>Original Price</h6>
                     <p>${{listing.beginningBid}}</p>
                     <br>
                     <h6>Category:</h6>

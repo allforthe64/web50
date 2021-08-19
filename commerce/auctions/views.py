@@ -137,6 +137,10 @@ def listing(request, listingTitle):
             b = Bid(ammount=newBid, bidder=currentUser, location=listingTitle)
             b.save()
 
+            #update highest bid of listing
+            topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
+            Listing.objects.filter(title=listingTitle).update(highestBid = topBid[0].ammount)
+
             #add message 2
             message2 = "Bid saved succesfully!"
 
