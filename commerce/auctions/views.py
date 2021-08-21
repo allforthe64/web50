@@ -98,7 +98,7 @@ def listing(request, listingTitle):
             creator = True
 
         #get comments
-        comments = Comment.objects.filter()
+        comments = Comment.objects.filter(page=listingTitle)
 
         #get data out of bid model
         topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
@@ -115,7 +115,8 @@ def listing(request, listingTitle):
             "originalPrice": listing[0].beginningBid,
             "currentHighestBid": topBid[0].ammount,
             "message": message,
-            "creator": creator   
+            "creator": creator,
+            "comments": comments   
 
         })
 
@@ -128,6 +129,7 @@ def listing(request, listingTitle):
         currentUser = request.user.username
         close = request.POST.get("close")
         creator = False
+        comment = request.POST.get("commentContent")
 
         
 
@@ -136,6 +138,9 @@ def listing(request, listingTitle):
 
         #get data out of bid model
         topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
+
+        #get data out of comments
+        comments = Comment.objects.filter(page=listingTitle)
 
         if listing[0].creator == currentUser:
             creator = True
@@ -161,7 +166,8 @@ def listing(request, listingTitle):
             "originalPrice": listing[0].beginningBid,
             "currentHighestBid": topBid[0].ammount,
             "message2": message2,
-            "creator": creator   
+            "creator": creator,
+            "comments": comments    
             
             })
         
@@ -181,7 +187,8 @@ def listing(request, listingTitle):
             "originalPrice": listing[0].beginningBid,
             "currentHighestBid": topBid[0].ammount,
             "message2": message2,
-            "creator": creator   
+            "creator": creator,
+            "comments": comments    
             
             })
 
@@ -201,10 +208,29 @@ def listing(request, listingTitle):
             "originalPrice": listing[0].beginningBid,
             "currentHighestBid": topBid[0].ammount,
             "message2": message2,
-            "creator": creator   
+            "creator": creator,
+            "comments": comments    
             
             })
             
+        if comment != None:
+
+            c = Comment(page=listingTitle, content=comment, commentor=currentUser)
+            c.save()
+
+            message2 = "Comment Posted!"
+
+            return render(request, "auctions/listing.html", {
+            "title": listingTitle,
+            "description": listing[0].description,
+            "image": listing[0].img, 
+            "originalPrice": listing[0].beginningBid,
+            "currentHighestBid": topBid[0].ammount,
+            "message2": message2,
+            "creator": creator,
+            "comments": comments   
+            
+            })
 
         return HttpResponseRedirect(reverse("index"))
 

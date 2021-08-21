@@ -76,18 +76,40 @@
     <br>
     <hr>
     <!--comments-->
-    
-    {% if creator %}
-    <br>
-    <hr>
-    <div class="form-check">
-        <form method="POST">
-            {% csrf_token %}
-            <div style="display: inline-flex; margin-left: 25px">
-                <button type="submit" class="btn btn-link" style="margin-left: 20px; color:darkred" value="true" name="close">Close listing</button>
-            </div>
-        </form>
+    <div style="margin-left: 20px">
+        <h3>Add comment</h3>
+        <br>
+        <div class="form-check">
+            <form method="POST">
+                {% csrf_token %}
+                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="commentContent"></textarea>
+                 <br>
+                 <button class="btn btn-primary" type="submit">Comment</button>       
+            </form>
+        </div>
+
+        {% if comments %}
+            {% for comment in comments %}
+                <br> 
+                <h6>{{comment.commentor}} said:</h6>
+                <p style="margin-left: 20px">{{comment.content}}</p>
+                <br>
+                <br>
+            {% endfor %}
+        {% endif %}
     </div>
+
+    {% if creator %}
+        <br>
+        <hr>
+        <div class="form-check">
+            <form method="POST">
+                {% csrf_token %}
+                <div style="display: inline-flex; margin-left: 25px">
+                    <button type="submit" class="btn btn-link" style="margin-left: 20px; color:darkred" value="true" name="close">Close listing</button>
+                </div>
+            </form>
+        </div>
     {% endif %}
     <br>
     <br>
