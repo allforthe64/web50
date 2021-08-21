@@ -7,6 +7,13 @@ from django.contrib.auth.decorators import login_required
 
 from .models import User, Listing, Bid, Watchlist
 
+CATEGORIES = {
+    "MagicalItems",
+    "Broomsticks",
+    "MagicalFoods",
+    "Miscellaneous"
+}
+
 @login_required(login_url='/login')
 def index(request):
 
@@ -205,7 +212,11 @@ def new(request):
     #get route
     if request.method == "GET":
         message = None
-        return render(request, "auctions/new.html")
+        names = ["Magical Items", "Broomsticks", "Magical Foods", "Miscellaneous"]
+        return render(request, "auctions/new.html", {
+            "names": names,
+            "categories": CATEGORIES
+        })
 
     else:
 
@@ -217,6 +228,12 @@ def new(request):
         price = request.POST.get("price")
         currentUser = request.user.username
         message = "New listing created!"
+
+        if category == "MagicalItems":
+            category = "Magical Items"
+
+        if category == "MagicalFoods":
+            category = "Magical Foods"
 
         #create new listing
         l = Listing(title=title, description=description, beginningBid=price, img=image, category=category, active=True, creator=currentUser)

@@ -36,7 +36,20 @@
         <br>
         <div style="margin-left: 20px">
             <h3>Enter category for item:</h3>
-            <input type="text" style="width: 300px;" name="category">
+            <select name="category">
+                {% for category in categories %}
+                    <option value={{category}}>
+                        {% if category == "MagicalItems" %}
+                            Magical Items
+                        {% elif category == "MagicalFoods" %}
+                            Magical Foods 
+                        {% else %}
+                            {{category}}
+                        {% endif %}
+                    
+                    </option>
+                {% endfor %}
+            </select>
         </div>
         <br>
         <hr>
