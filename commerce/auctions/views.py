@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import User, Listing, Bid, Watchlist
+from .models import User, Listing, Bid, Watchlist, Comment
 
 CATEGORIES = {
     "MagicalItems",
@@ -96,6 +96,9 @@ def listing(request, listingTitle):
         #check to see if the page's creator is the one using the page
         if listing[0].creator == currentUser:
             creator = True
+
+        #get comments
+        comments = Comment.objects.filter()
 
         #get data out of bid model
         topBid = Bid.objects.filter(location = "{title}".format(title = listingTitle)).order_by('-ammount')
@@ -285,8 +288,32 @@ def watchlist(request):
                 "message": message
             })
 
-    
-    
+def category(request):
+
+    if request.method == "GET":
+        options = CATEGORIES
+        searched = False
+
+        return render(request, "auctions/category.html", {
+            "options": options,
+            "searched": searched
+        })
+    else:
+
+        searched = True
+        category = request.POST.get("categories")
+
+        if category == "MagicalItems":
+            category = "Magical Items"
+        elif category == "MagicalFoods":
+            category = "Magical Foods" 
+
+        results = Listing.objects.all().filter(active = True, category = category)
+
+        return render(request, "auctions/category.html", {
+            'searched': searched,
+            "results": results
+        })
 
 
 

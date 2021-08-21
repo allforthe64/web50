@@ -28,3 +28,9 @@ class Watchlist(models.Model):
     id = models.AutoField(primary_key=True, default=None)
     page = models.CharField(max_length=64, help_text="Add page title")
     watcher = models.CharField(max_length=64, help_text = "Add name of watcher")
+
+class Comment(models.Model):
+    id = models.AutoField(primary_key=True, default=None)
+    page = models.CharField(max_length=64, help_text="Add page title")
+    content = models.TextField(help_text = "Enter content of comment")
+    commentor = models.CharField(max_length=64, help_text = "Add name of watcher")
