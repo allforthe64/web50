@@ -1,0 +1,35 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create New Page 
+{% endblock %}
+
+{% block body %}
+    <h1 style="margin: left 40px;">Create New Page:</h1>
+    <br>
+    {% if message %}
+        <br>
+        <h4>{{message}}</h4>
+        <br>
+    {% endif %}
+    
+    <form method="POST">
+        {% csrf_token %}
+        <!--Title creation-->
+        <div style="margin-left: 40px;">
+            <h3>Enter Title:</h3>
+            <input type="text" name="title" style="width: 400px; height:30px;">
+        </div>
+
+        <!--text area-->
+        <div style="margin-left: 40px">
+            <h3>Content:</h3>    
+            <textarea name="newPageContents" rows="4" cols="50"></textarea>
+        </div>
+        
+        
+        <button type="submit" class="searchButton">Save Page</button>
+        
+    </form>
+
+{% endblock %}
