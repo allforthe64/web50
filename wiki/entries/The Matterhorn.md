@@ -1,1 +1,0 @@
-Legendary mountain in Switzerland, which is world renowned for its almost perfect pyramid shape and symmetry. Also found on the package of Toblerone candy bars. The mountain is located near the town of Zermatt.
