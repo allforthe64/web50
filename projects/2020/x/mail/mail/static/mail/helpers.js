@@ -10,15 +10,8 @@ function send() {
     .then(response => response.json())
     .then(result => {
         //print result
-        console.log(result)
+        console.log(result);
     })
   }
 
-  function emails_in_inbox () {
-      fetch('/emails/inbox')
-      .then(response => response.json())
-      .then(emails => {
-          //print emails to log
-          console.log(emails)
-      })
-  }
+  
