@@ -191,6 +191,7 @@ function load_email() {
 
       // making sure read variable is set to true
       if (email['read'] == false) {
+        
         // setting read atribute
         fetch(`/emails/${id}`, {
           method: 'PUT',
