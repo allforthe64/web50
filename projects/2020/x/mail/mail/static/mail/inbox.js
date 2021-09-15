@@ -235,6 +235,7 @@ function load_email() {
             archived: !archive
           })
         });
+        
         // loading inbox after toggling archive property
         load_mailbox('inbox');
       });
