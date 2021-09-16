@@ -63,4 +63,4 @@ def register(request):
         return render(request, "network/register.html")
 
 def new(request):
-    pass
+    return render(request, "network/post.html")
