@@ -12,4 +12,7 @@ class Post(models.Model):
     time = models.TimeField(auto_now_add=True, default=None),
     content = models.TextField(default=None)
 
-
+    def serialize(self):
+        return {
+            "likes":self.likes
+        }
