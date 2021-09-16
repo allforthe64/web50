@@ -75,8 +75,9 @@ def new(request):
         poster = request.user.username
         content = request.POST.get("postContent")
         date = datetime.date.today()
-
-        print(date)
-        print(poster)
+        time = "0:00"
+        
+        p = Post(poster=poster, content=content, time=time, date=date)
+        p.save()
 
         return HttpResponseRedirect(reverse('index')) 
