@@ -7,7 +7,7 @@ class User(AbstractUser):
 
 class Post(models.Model):
     post_id = models.AutoField(primary_key=True, default=None),
-    poster = models.CharField(max_length=64, default=None),
+    poster = models.ForeignKey(User, on_delte=models.CASCADE, related_name="user"),
     date = models.DateField(default=None),
     time = models.TimeField(auto_now_add=True, default=None),
     content = models.TextField(default=None)
