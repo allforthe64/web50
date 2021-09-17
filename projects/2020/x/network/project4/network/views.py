@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 import datetime
 
-from .models import User#, Post
+from .models import User, Post
 
 
 def index(request):
