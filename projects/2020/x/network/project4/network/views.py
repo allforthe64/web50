@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 import datetime
 
-from .models import User, Post
+from .models import User, Entry
 
 
 def index(request):
@@ -70,15 +70,3 @@ def new(request):
     if request.method == "GET":
         return render(request, "network/post.html")
 
-    else:
-
-        #establish variables
-        poster = request.user.username
-        content = request.POST.get("postContent")
-        date = datetime.date.today()
-        time = "0:00"
-        
-        p = Post.objects.create(poster=poster, content=content, time=time, date=date)
-        p.save()
-
-        return HttpResponseRedirect(reverse('index')) 
