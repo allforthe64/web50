@@ -3,12 +3,14 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib import messages
 import datetime
 
 from .models import User, Entry
 
-
 def index(request):
+    
+    
     return render(request, "network/index.html")
 
 
@@ -69,4 +71,18 @@ def new(request):
     #get route
     if request.method == "GET":
         return render(request, "network/post.html")
+    
+    #post route
+    else:
+        
+        #establish variables
+        content = request.POST.get("postContent")
+        user = request.user
+        
+        #create new object
+        entry = Entry(content=content, poster=user)
+        entry.save()
 
+        messages.add_message(request, messages.SUCCESS, "Posted!")
+
+        return HttpResponseRedirect(reverse('index'))

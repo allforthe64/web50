@@ -1,5 +1,15 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
     TODO
 {% endblock %}
