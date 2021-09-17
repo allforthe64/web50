@@ -77,7 +77,7 @@ def new(request):
         date = datetime.date.today()
         time = "0:00"
         
-        p = Post(poster=poster, content=content, time=time, date=date)
+        p = Post.objects.create(poster=poster, content=content, time=time, date=date)
         p.save()
 
         return HttpResponseRedirect(reverse('index')) 
