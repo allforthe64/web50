@@ -17,5 +17,6 @@ class Entry(models.Model):
             "id": self.post_id,
             "poster": self.poster,
             "content": self.content,
-            "timestamp": self.timestamp.strftime("%b %d %Y, %I:%M %p")
+            "timestamp": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
+            "likes": self.likes
         }
