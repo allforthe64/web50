@@ -10,8 +10,12 @@ from .models import User, Entry
 
 def index(request):
     
+    #get all of the entries out of the database
+    allPosts = Entry.objects.all().order_by("-timestamp")
     
-    return render(request, "network/index.html")
+    return render(request, "network/index.html", {
+        "posts": allPosts
+    })
 
 
 def login_view(request):

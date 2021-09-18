@@ -11,5 +11,13 @@
         {% endfor %}
     {% endif %}
 
-    TODO
+    <!--Iterate over posts-->
+    {% for post in posts %}
+        <hr>
+        <div style="margin-left: 40px">    
+            <br>
+            <h4>{{post.poster}}</h4>
+        </div>
+    {% endfor %}
+
 {% endblock %}
