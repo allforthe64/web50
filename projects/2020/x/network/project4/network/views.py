@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib import messages
+from django.core.paginator import Paginator
 import datetime
 
 from .models import User, Entry
@@ -12,9 +13,14 @@ def index(request):
     
     #get all of the entries out of the database
     allPosts = Entry.objects.all().order_by("-timestamp")
+
+    #set up paginator object
+    paginator = Paginator(allPosts, 10)
+    pageNumber = request.GET.get('page')
+    pageObject = paginator.get_page(pageNumber)
     
     return render(request, "network/index.html", {
-        "posts": allPosts
+        "posts": pageObject
     })
 
 
