@@ -11,13 +11,22 @@
         {% endfor %}
     {% endif %}
 
-    <!--Iterate over posts-->
-    {% for post in posts %}
-        <hr>
-        <div style="margin-left: 40px">    
-            <br>
-            <h4>{{post.poster}}</h4>
+
+
+    <div class="container p-4">
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
+                    <div class= "card h-100 p-4">
+                        <!--the stuff for each of the posts-->
+                        <h4>{{post.poster}}</h4>
+                        <hr>
+                        <br>
+                        <p>{{post.content}}</p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
 
 {% endblock %}
