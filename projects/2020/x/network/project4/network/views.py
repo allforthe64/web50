@@ -1,11 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator
 import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import User, Entry
 
@@ -96,3 +97,9 @@ def new(request):
         messages.add_message(request, messages.SUCCESS, "Posted!")
 
         return HttpResponseRedirect(reverse('index'))
+
+# like function
+@csrf_exempt
+def like(request, post_id):
+    pass
+
