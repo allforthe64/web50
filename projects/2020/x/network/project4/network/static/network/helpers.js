@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    alert("Loaded!")
+
     //add event listeners
     document.querySelector('#like').addEventListener('click', function() {
         id = document.querySelector('#like').value;
-        console.log(id)
+        console.log(id);
         like(id)
     });
 
@@ -11,5 +13,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //like function
 function like(post_id) {
-    alert("Someone liked a post!")
+    alert("Someone liked a post!");
 }
