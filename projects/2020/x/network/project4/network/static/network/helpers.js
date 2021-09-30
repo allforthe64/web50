@@ -1,16 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    alert("Loaded!")
-
     //add event listeners
-    document.querySelector('.like').addEventListener('click', function() {
-        id = document.querySelector('.like').value;
-        alert(id)
-    });
+    document.querySelectorAll('#like').forEach(item => {
+        item.addEventListener('click', event => {
+            like(item.value);
+        })
+    })
 
 })
 
 //like function
-function like() {
-    alert("Someone liked a post!");
+function like(post_id) {
+    alert(post_id);
 }
