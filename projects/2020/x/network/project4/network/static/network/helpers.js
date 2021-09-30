@@ -5,13 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
     //add event listeners
     document.querySelector('#like').addEventListener('click', function() {
         id = document.querySelector('#like').value;
-        console.log(id);
-        like(id)
+        alert(id)
     });
 
 })
 
 //like function
-function like(post_id) {
+function like() {
     alert("Someone liked a post!");
 }
