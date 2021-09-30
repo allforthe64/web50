@@ -103,5 +103,24 @@ def new(request):
 @csrf_exempt
 @login_required
 def like(request, post_id):
-    pass
+    
+    #query for requested post
+    try:
+        entry = Entry.objects.get(post_id=post_id)
+    except Entry.DoesNotExist:
+        return JsonResponse({"error": "Post not found."}, status=404)
+
+    #return post contents
+    if request.method == "GET":
+        return JsonResponse(entry.serialize())
+
+    #update posts likes
+    elif request.method == "PUT":
+        pass
+
+    #request must be get or put
+    else:
+        return JsonResponse({
+            "error": "GET or PUT request required"
+        }, status=400)
 

@@ -11,5 +11,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //like function
 function like(post_id) {
-    alert(post_id);
+
+
+    // fetch the api url
+    fetch(`/like/${post_id}`)
+        .then(response => response.json())
+        .then(entry => {
+
+            //setup current likes variable
+            let currentLikes = entry["likes"];
+            
+            alert(currentLikes)
+        })
 }
