@@ -1,8 +1,7 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 {% block body %}
-
-    <script src="network/helpers.js"></script>
 
     {% if messages %}
         {% for message in messages %}
@@ -28,8 +27,8 @@
                         <p>Time posted: {{ post.timestamp }}</p>
                         <br>
                         <div style="display: inline-flex">
-                            <button style="width: 60px" class="btn btn-primary" value={{post.id}} id="Like">Like</button>
-                            <button style="width: 80px; margin-left:10px" class="btn btn-primary" value={{post.id}} id="Dislike">Dislike</button>
+                            <button style="width: 60px" class="btn btn-primary" value="{{ post.post_id }}" id="like">Like</button>
+                            <button style="width: 80px; margin-left:10px" class="btn btn-primary" value="{ {post.post_id }}" id="dislike">Dislike</button>
                         </div>
                     </div>
                 </div>
@@ -59,4 +58,8 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/helpers.js' %}"></script>
 {% endblock %}

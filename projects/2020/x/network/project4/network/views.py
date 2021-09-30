@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib import messages
@@ -100,6 +101,7 @@ def new(request):
 
 # like function
 @csrf_exempt
+@login_required
 def like(request, post_id):
     pass
 
