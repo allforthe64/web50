@@ -7,7 +7,7 @@ class User(AbstractUser):
 
 class Entry(models.Model):
     post_id = models.AutoField(primary_key=True, default=None)
-    poster = models.ForeignKey(User, on_delete=models.CASCADE, related_name="poster")
+    poster = models.ForeignKey(User, on_delete=models.PROTECT, related_name="poster")
     content = models.TextField(default=None)
     timestamp = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
@@ -15,7 +15,7 @@ class Entry(models.Model):
     def serialize(self):
         return {
             "id": self.post_id,
-            "poster": self.poster,
+            "poster": self.poster.username,
             "content": self.content,
             "timestamp": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
             "likes": self.likes

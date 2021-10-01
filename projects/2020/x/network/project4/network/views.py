@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -8,6 +9,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 import datetime
 from django.views.decorators.csrf import csrf_exempt
+
 
 from .models import User, Entry
 
@@ -112,11 +114,18 @@ def like(request, post_id):
 
     #return post contents
     if request.method == "GET":
+        print(entry.likes)
         return JsonResponse(entry.serialize())
 
     #update posts likes
     elif request.method == "PUT":
-        pass
+        data = json.loads(request.body)
+        if data.get("likes") is not None:
+            entry.likes = data["likes"]
+
+        # save the updated object
+        entry.save()
+        return HttpResponse(status=204)
 
     #request must be get or put
     else:
