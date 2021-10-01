@@ -1,9 +1,10 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 {% block body %}
-    <p hidden value={{username}} id="currentUser"></p>
+    <p hidden value={{username}} id="currentUser">{{username}}</p>
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'network/posts.js' %"></script>
+    <script src="{% static 'network/posts.js' %}"></script>
 {% endblock %}
