@@ -20,3 +20,15 @@ class Entry(models.Model):
             "timestamp": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
             "likes": self.likes
         }
+
+class Follow(models.Model):
+    follow_id = models.AutoField(primary_key=True, default=None)
+    following = models.CharField(max_length = 64, default=None)
+    followedBy = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followerUsrName")
+
+    def serialize(self):
+        return {
+            "id": self.follow_id,
+            "following": self.following,
+            "followedBy": self.followedBy
+        }

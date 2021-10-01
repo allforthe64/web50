@@ -11,7 +11,7 @@ import datetime
 from django.views.decorators.csrf import csrf_exempt
 
 
-from .models import User, Entry
+from .models import User, Entry, Follow
 
 def index(request):
     
