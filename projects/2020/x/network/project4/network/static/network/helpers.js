@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`/like/${item.value}`)
                 .then(response => response.json())
                 .then(entry => {
-                    children[2].innerHTML = `${entry["likes"] + 1} Likes`;
-                }) 
-            
+                    children[1].innerHTML = `${entry["likes"] + 1} Likes`;
+                })
+                
         })
     })
 
@@ -38,6 +38,29 @@ function like(post_id) {
             //establish the current number of likes and update the value
             let currentLikes = entry["likes"];
             let newLikes = currentLikes + 1;
+
+            //make put request and update the number of likes
+            fetch(`/like/${post_id}`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    likes: newLikes
+                })
+            })
+
+        })
+}
+
+//dislike function
+function dislike(post_id) {
+
+    // fetch the api url
+    fetch(`/like/${post_id}`)
+        .then(response => response.json())
+        .then(entry => {
+
+            //establish the current number of likes and update the value
+            let currentLikes = entry["likes"];
+            let newLikes = currentLikes - 1;
 
             //make put request and update the number of likes
             fetch(`/like/${post_id}`, {
