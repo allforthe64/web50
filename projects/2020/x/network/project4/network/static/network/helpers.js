@@ -4,14 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('#like').forEach(item => {
         item.addEventListener('click', event => {
 
-
-                like(item.value);
+            if (item.style.backgroundColor == 'blue') {
                 
+                like(item.value);
+
                 var target = event.target;
 
                 // select the parent div
                 if (!(target.tagName == 'DIV')) {
-                    target = target.parentElement
+                    target = target.parentElement;
                 }
 
                 // get the parent div's children 
@@ -27,6 +28,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.innerHTML = 'Unlike';
                 item.style.width = "75px";
                 item.style.backgroundColor = "Grey";
+            } else{
+                
+                dislike(item.value);
+
+                var target = event.target;
+
+                // select the parent div
+                if (!(target.tagName == 'DIV')) {
+                    target = target.parentElement;
+                }
+
+                // get the parent div's children 
+                var children = target.children;
+
+                //change the inner html
+                fetch(`/like/${item.value}`)
+                    .then(response => response.json())
+                    .then(entry => {
+                        children[1].innerHTML = `${entry["likes"] - 1} Likes`;
+                    })
+                    
+                item.innerHTML = 'Like';
+                item.style.width = "60px";
+                item.style.backgroundColor = "blue";
+            }
+            
+            
+            
 
            
         })
@@ -47,6 +76,8 @@ function like(post_id) {
             let currentLikes = entry["likes"];
             let newLikes = currentLikes + 1;
 
+            console.log(`current likes: ${currentLikes}`);
+            console.log(`new likes: ${newLikes}`);
             //make put request and update the number of likes
             fetch(`/like/${post_id}`, {
                 method: 'PUT',
@@ -69,6 +100,9 @@ function dislike(post_id) {
             //establish the current number of likes and update the value
             let currentLikes = entry["likes"];
             let newLikes = currentLikes - 1;
+            
+            console.log(`current likes: ${currentLikes}`);
+            console.log(`new likes: ${newLikes}`);
 
             //make put request and update the number of likes
             fetch(`/like/${post_id}`, {

@@ -101,7 +101,7 @@ def new(request):
 
         return HttpResponseRedirect(reverse('index'))
 
-# like function
+# like function and unlike
 @csrf_exempt
 @login_required
 def like(request, post_id):
@@ -114,7 +114,6 @@ def like(request, post_id):
 
     #return post contents
     if request.method == "GET":
-        print(entry.likes)
         return JsonResponse(entry.serialize())
 
     #update posts likes
@@ -132,4 +131,6 @@ def like(request, post_id):
         return JsonResponse({
             "error": "GET or PUT request required"
         }, status=400)
+
+
 
