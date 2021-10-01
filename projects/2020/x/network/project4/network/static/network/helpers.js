@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('#like').forEach(item => {
         item.addEventListener('click', event => {
 
-            if (item.backgroundColor = "Blue") {
 
                 like(item.value);
                 
@@ -28,33 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.innerHTML = 'Unlike';
                 item.style.width = "75px";
                 item.style.backgroundColor = "Grey";
-            }
-            
-            if (item.backgroundColor = "Grey") {
 
-                alert("dislike activated");
-                
-                dislike(item.value);
-
-                var target = event.target;
-
-                if (!(target.tagName == 'DIV')) {
-                    target = target.parentElement;
-                }
-
-                var children = target.children;
-
-                //chagne the inner html
-                fetch(`/like/${item.value}`)
-                    .then(response => response.json())
-                    .then(entry => {
-                        children[1].innerHTML = `${entry["likes"] - 1} Likes`;
-                    })
-
-                item.innerHTML = 'Like';
-                item.style.width = "60px";
-                item.style.backgroundColor = "Blue";
-            }
+           
         })
         
     })
