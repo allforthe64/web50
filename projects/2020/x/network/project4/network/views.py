@@ -132,5 +132,11 @@ def like(request, post_id):
             "error": "GET or PUT request required"
         }, status=400)
 
+# view profile function
+def profile(request, username):
 
+    return render(request, "network/profile.html", {
+        "username":request.user,
+        "viewing": username    
+    })
 
