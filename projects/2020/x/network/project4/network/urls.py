@@ -12,5 +12,6 @@ urlpatterns = [
     path("profile/<str:username>", views.profile, name="profile"),
 
     #api urls
-    path("like/<str:post_id>", views.like, name="like")
+    path("like/<str:post_id>", views.like, name="like"),
+    path("follow/<str:action>", views.follow, name="follow")
 ]

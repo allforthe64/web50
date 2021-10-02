@@ -139,9 +139,15 @@ def profile(request, username):
     following = Follow.objects.all().filter(followedBy=username)
 
     return render(request, "network/profile.html", {
-        "username":request.user,
+        "username":request.user.username,
         "viewing": username,
         "followers": len(followers),
         "following": len(following)   
     })
+
+# follow/unfollow function
+@csrf_exempt
+@login_required
+def follow(request, action):
+    pass
 
