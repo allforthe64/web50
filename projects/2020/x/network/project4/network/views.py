@@ -148,6 +148,8 @@ def profile(request, username):
 # follow/unfollow function
 @csrf_exempt
 @login_required
-def follow(request, action):
+def follow(request, action, account):
+    
+    # create a new follower object
     pass
 
