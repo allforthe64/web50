@@ -135,8 +135,13 @@ def like(request, post_id):
 # view profile function
 def profile(request, username):
 
+    followers = Follow.objects.all().filter(following=username)
+    following = Follow.objects.all().filter(followedBy=username)
+
     return render(request, "network/profile.html", {
         "username":request.user,
-        "viewing": username    
+        "viewing": username,
+        "followers": len(followers),
+        "following": len(following)   
     })
 

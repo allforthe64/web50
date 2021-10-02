@@ -24,7 +24,7 @@ class Entry(models.Model):
 class Follow(models.Model):
     follow_id = models.AutoField(primary_key=True, default=None)
     following = models.CharField(max_length = 64, default=None)
-    followedBy = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followerUsrName")
+    followedBy = models.CharField(max_length = 64, default=None)
 
     def serialize(self):
         return {
