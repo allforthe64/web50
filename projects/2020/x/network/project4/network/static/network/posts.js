@@ -4,6 +4,24 @@ document.addEventListener('DOMContentLoaded', function () {
     var holder = document.querySelector('#username').innerHTML;
     var profileViewing = holder.split("'");
 
+    //query the api to see if the user is currently following the page
+    fetch(`/search/${profileViewing[0]}/${currentUser}`)
+        .then(response => response.json())
+        .then(result => {
+
+            var isFollowing = result;
+
+            if (isFollowing == true) {
+                var button = document.querySelector("#follow");
+
+                button.innerHTML = "Unfollow";
+                button.style.backgroundColor = "grey";
+            }
+            
+        })
+
+    
+
     if (currentUser == profileViewing[0]) {
 
         //get the div with the button

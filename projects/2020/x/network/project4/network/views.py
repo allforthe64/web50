@@ -168,11 +168,19 @@ def follow(request, action, account):
 
 @csrf_exempt
 @login_required
-def search(request):
-
-    data = json.loads(request.body)
+def search(request, following, followedBy):
 
     #query the database to see if the current user has already followed
+    try:
+        f = Follow.objects.get(following=following, followedBy=followedBy)
+
+        if f != None:
+            return JsonResponse(True, safe=False)
+
+    except Follow.DoesNotExist:
+        return JsonResponse(False, safe=False)
+
+
 
 @csrf_exempt
 @login_required
