@@ -4,9 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var holder = document.querySelector('#username').innerHTML;
     var profileViewing = holder.split("'");
 
-    console.log(currentUser);
-    console.log(profileViewing[0]);
-
     if (currentUser == profileViewing[0]) {
 
         //get the div with the button
@@ -32,10 +29,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
 
                 //update the elements displaying followers
-                var fHolder = document.querySelector("#followers").innerHTML;
-                var followers = fHolder.split(" ");
-
-                fHolder.innerHTML = `Followers: ${followers[1] + 1}`;
+                fetch(`/number/${profileViewing[0]}`)
+                    .then(response => response.json())
+                    .then(result => {
+                        result += 1;
+                        var display = document.querySelector("#followers");
+                        display.innerHTML = `Follower: ${result}`;
+                    })
 
                 //adjust styling
                 this.innerHTML = "Unfollow";
@@ -53,10 +53,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
 
                 //update the elements displaying followers
-                var fHolder = document.querySelector("#followers").innerHTML;
-                var followers = fHolder.split(" ");
-
-                fHolder.innerHTML = `Followers: ${followers[1] - 1}`;
+                fetch(`/number/${profileViewing[0]}`)
+                    .then(response => response.json())
+                    .then(result => {
+                        result -= 1;
+                        var display = document.querySelector("#followers");
+                        display.innerHTML = `Follower: ${result}`;
+                    })
 
                 //adjust styling
                 this.innerHTML = "Follow";

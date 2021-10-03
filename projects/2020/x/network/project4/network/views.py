@@ -162,7 +162,23 @@ def follow(request, action, account):
     #delete a follower
     else:
 
-        Follow.objects.filter(following=data["following"], followedBy=data["followedBy"])
+        Follow.objects.filter(following=data["following"], followedBy=data["followedBy"]).delete()
 
         return HttpResponse(status=204)
 
+@csrf_exempt
+@login_required
+def search(request):
+
+    data = json.loads(request.body)
+
+    #query the database to see if the current user has already followed
+
+@csrf_exempt
+@login_required
+def number(request, target):
+
+    #query the database 
+    f = Follow.objects.filter(following=target)
+
+    return JsonResponse(len(f), safe=False)
