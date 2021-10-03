@@ -24,7 +24,14 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
                     <div class= "card h-100 p-4">
                         <!--the stuff for each of the posts-->
-                        <h4>{{ post.poster }}</h4>
+                        <div style="display:inline-flex">
+                            <h4>{{ post.poster }}</h4>
+                            
+                            <!--display edit post button-->
+                            {% if owner == True %}
+                                <a href="/edit/{{post.poster}}/{{post.post_id}}" style="color:red; margin-top: 5px; margin-left: 40px">Edit post</a>
+                            {% endif %}
+                        </div>
                         <hr>
                         <br>
                         <p>{{ post.content }}</p>

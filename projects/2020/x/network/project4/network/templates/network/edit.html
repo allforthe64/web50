@@ -1,0 +1,22 @@
+{% extends 'network/layout.html' %}
+
+{% block body %}
+    
+    <div style="margin-left: 80px; margin-top: 100px; background-color: lightgray; width: 90%">
+        <br>
+
+        <!--Post content area-->
+        <form method="POST">
+            {% csrf_token %}
+
+            <h3 style="margin-top: 50px; margin-left: 20px">Content:</h3>
+            <textarea id="postContent" name="postContent" rows="6" cols="150" style="margin-left: 30px" required>{{content}}</textarea>
+            <br>
+            <br>
+            <button type="submit" style="margin-left: 20px" class="btn btn-primary">Update</button>
+            <br>
+            <br>
+        </form>
+        
+    </div>
+{% endblock %}

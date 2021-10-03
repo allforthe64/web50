@@ -101,6 +101,51 @@ def new(request):
 
         return HttpResponseRedirect(reverse('index'))
 
+# view profile function
+def profile(request, username):
+
+    followers = Follow.objects.all().filter(following=username)
+    following = Follow.objects.all().filter(followedBy=username)
+
+    if request.user.username == username:
+        owner = True
+    else:
+        owner = False
+
+
+    #query posts created by the user whos profile is being viewed, and sort them in reverse chronological order
+    userPosts = Entry.objects.all().filter(poster__username=username).order_by("-timestamp")
+
+    print(owner)
+
+    return render(request, "network/profile.html", {
+        "username":request.user.username,
+        "viewing": username,
+        "followers": len(followers),
+        "following": len(following),
+        "posts": userPosts,
+        "owner": owner   
+    })
+
+#edit post function
+def edit(request, user, post_id):
+    
+    #get route
+    if request.method == "GET":
+
+        #query database for post
+        post = Entry.objects.get(poster__username=user, post_id=post_id)
+
+        return render(request, "network/edit.html", {
+            "content": post.content
+        })
+
+    #post route
+    else:
+        pass
+
+
+
 # like function and unlike
 @csrf_exempt
 @login_required
@@ -132,24 +177,6 @@ def like(request, post_id):
             "error": "GET or PUT request required"
         }, status=400)
 
-# view profile function
-def profile(request, username):
-
-    followers = Follow.objects.all().filter(following=username)
-    following = Follow.objects.all().filter(followedBy=username)
-
-    #query posts created by the user whos profile is being viewed, and sort them in reverse chronological order
-    userPosts = Entry.objects.all().filter(poster__username=username).order_by("-timestamp")
-
-    print(userPosts)
-
-    return render(request, "network/profile.html", {
-        "username":request.user.username,
-        "viewing": username,
-        "followers": len(followers),
-        "following": len(following),
-        "posts": userPosts   
-    })
 
 # follow/unfollow function
 @csrf_exempt
