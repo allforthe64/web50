@@ -20,8 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
             
         })
 
-    
-
     if (currentUser == profileViewing[0]) {
 
         //get the div with the button
