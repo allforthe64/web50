@@ -138,11 +138,17 @@ def profile(request, username):
     followers = Follow.objects.all().filter(following=username)
     following = Follow.objects.all().filter(followedBy=username)
 
+    #query posts created by the user whos profile is being viewed, and sort them in reverse chronological order
+    userPosts = Entry.objects.all().filter(poster__username=username).order_by("-timestamp")
+
+    print(userPosts)
+
     return render(request, "network/profile.html", {
         "username":request.user.username,
         "viewing": username,
         "followers": len(followers),
-        "following": len(following)   
+        "following": len(following),
+        "posts": userPosts   
     })
 
 # follow/unfollow function
