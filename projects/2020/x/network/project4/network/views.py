@@ -149,7 +149,20 @@ def profile(request, username):
 @csrf_exempt
 @login_required
 def follow(request, action, account):
+
+    data = json.loads(request.body)
     
     # create a new follower object
-    pass
+    if action == "follow":
+        f = Follow(following=data["following"], followedBy=data["followedBy"])
+        f.save()
+
+        return HttpResponse(status=204)
+    
+    #delete a follower
+    else:
+
+        Follow.objects.filter(following=data["following"], followedBy=data["followedBy"])
+
+        return HttpResponse(status=204)
 

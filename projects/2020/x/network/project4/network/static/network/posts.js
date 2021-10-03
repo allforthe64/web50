@@ -22,9 +22,44 @@ document.addEventListener('DOMContentLoaded', function () {
             
             if (this.style.backgroundColor == "blue")
             {
+                //call the api
+                fetch(`/follow/follow/${profileViewing[0]}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        following: profileViewing[0],
+                        followedBy: currentUser
+                    })
+                })
+
+                //update the elements displaying followers
+                var fHolder = document.querySelector("#followers").innerHTML;
+                var followers = fHolder.split(" ");
+
+                fHolder.innerHTML = `Followers: ${followers[1] + 1}`;
+
+                //adjust styling
+                this.innerHTML = "Unfollow";
                 this.style.backgroundColor = "grey";
             }
             else {
+                
+                //call the api
+                fetch(`/follow/unfollow/${profileViewing[0]}`, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        following: profileViewing[0],
+                        followedBy: currentUser
+                    })
+                })
+
+                //update the elements displaying followers
+                var fHolder = document.querySelector("#followers").innerHTML;
+                var followers = fHolder.split(" ");
+
+                fHolder.innerHTML = `Followers: ${followers[1] - 1}`;
+
+                //adjust styling
+                this.innerHTML = "Follow";
                 this.style.backgroundColor = "blue";
             }
 
