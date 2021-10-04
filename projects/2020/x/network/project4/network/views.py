@@ -128,11 +128,12 @@ def profile(request, username):
     })
 
 #edit post function
+@login_required(login_url='/login')
 def edit(request, user, post_id):
     
     #query database for post
     post = Entry.objects.get(poster__username=user, post_id=post_id)
-    
+
     #get route
     if request.method == "GET":
 
@@ -142,13 +143,28 @@ def edit(request, user, post_id):
 
     #post route
     else:
+
+        #get the data out of the template
+        content = request.POST.get("postContent")
+
+        #update the content of the post
+        post.content = content
+
+        print(post.content)
+        post.save(update_fields=['content'])
+
+        #create a message and redirect to the index page
+        messages.add_message(request, messages.SUCCESS, "Posted!")
+
+        return HttpResponseRedirect(f"/profile/{request.user.username}")
+
         
 
 
 
 # like function and unlike
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def like(request, post_id):
     
     #query for requested post
@@ -180,7 +196,7 @@ def like(request, post_id):
 
 # follow/unfollow function
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def follow(request, action, account):
 
     data = json.loads(request.body)
@@ -200,7 +216,7 @@ def follow(request, action, account):
         return HttpResponse(status=204)
 
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def search(request, following, followedBy):
 
     #query the database to see if the current user has already followed
@@ -216,7 +232,7 @@ def search(request, following, followedBy):
 
 
 @csrf_exempt
-@login_required
+@login_required(login_url='/login')
 def number(request, target):
 
     #query the database 

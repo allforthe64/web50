@@ -4,6 +4,15 @@
 {% block body %}
     <p hidden value={{username}} id="currentUser">{{username}}</p>
 
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
     <!--header-->
     <br>
     <br>
