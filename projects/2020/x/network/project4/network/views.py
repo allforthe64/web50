@@ -130,11 +130,11 @@ def profile(request, username):
 #edit post function
 def edit(request, user, post_id):
     
+    #query database for post
+    post = Entry.objects.get(poster__username=user, post_id=post_id)
+    
     #get route
     if request.method == "GET":
-
-        #query database for post
-        post = Entry.objects.get(poster__username=user, post_id=post_id)
 
         return render(request, "network/edit.html", {
             "content": post.content
@@ -142,7 +142,7 @@ def edit(request, user, post_id):
 
     #post route
     else:
-        pass
+        
 
 
 
