@@ -159,6 +159,28 @@ def edit(request, user, post_id):
         return HttpResponseRedirect(f"/profile/{request.user.username}")
 
         
+@login_required(login_url='/login')
+def following(request):
+    
+    queries = []
+    holder = Follow.objects.all().filter(followedBy = request.user.username)
+    users = []
+    postsToLoad = []
+
+    for h in holder:
+        users.append(h.following)
+
+    for u in users:
+        thing = Entry.objects.all().filter(poster__username=u)
+        queries.append(thing)
+    
+    for query in queries:
+        for q in query:
+            postsToLoad.append(q)
+    
+    return render(request, "network/following.html", {
+        "posts": postsToLoad
+    })
 
 
 
@@ -239,3 +261,5 @@ def number(request, target):
     f = Follow.objects.filter(following=target)
 
     return JsonResponse(len(f), safe=False)
+
+
